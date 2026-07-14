@@ -154,7 +154,7 @@
     var el = $("out-list");
     if (!el) return;
     el.innerHTML = (SITE.outreach || []).map(function (o) {
-      var link = "";
+      var link = "https://open.spotify.com/show/5nECIx73y9bkGT8RUQkZSQ";
       if (o.url)                 link = '<a class="todo" href="' + esc(o.url) + '" target="_blank" rel="noopener">' + esc(o.linkLabel || "Open ↗") + '</a>';
       else if (o.linkLabel)      link = '<span class="todo">↗ add link in data.js</span>';
       return '<div class="out">' + (OUT_ICONS[o.icon] || OUT_ICONS.map) +
