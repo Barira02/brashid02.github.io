@@ -32,7 +32,7 @@ const SITE = {
       linkedin:     "https://www.linkedin.com/in/brashid02/",
       scholar:      "https://scholar.google.com/scholar?q=%22Barira+Rashid%22",
       researchgate: "https://www.researchgate.net/profile/Barira-Rashid",
-      orcid:        "https://orcid.org/orcid-search/search?searchQuery=Barira%20Rashid"
+      orcid:        "https://orcid.org/0000-0002-4601-1675"
     },
 
     // optional: put a PDF at assets/cv.pdf and set this to "assets/cv.pdf"
