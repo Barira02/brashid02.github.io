@@ -47,63 +47,6 @@ const SITE = {
     cv: ""
   },
 
-  /* ------------------------------------------------------------- MAP LABELS */
-  /* The two toggleable layers on the hero map. Rename freely.                */
-  mapLabels: {
-    qualifications: "Qualifications",
-    affiliations:   "Affiliations"
-  },
-
-  /* --------------------------------------------------------- QUALIFICATIONS */
-  /* Powers BOTH the map pins AND the education timeline — one source, so the
-     two can never disagree. Chronological (oldest first); pins auto-number.  */
-  qualifications: [
-    {
-      degree:  "BS, Environmental Science",
-      school:  "Fatima Jinnah Women University",
-      place:   "Rawalpindi, Pakistan",
-      note:    "",
-      coords:  [33.5978, 73.0517]
-    },
-    {
-      degree:  "MS, Remote Sensing & GIS",
-      school:  "National University of Sciences & Technology",
-      place:   "Islamabad, Pakistan",
-      note:    "",
-      coords:  [33.6423, 72.9906]
-    },
-    {
-      degree:  "MS, GIS & Cartography",
-      school:  "Arizona State University",
-      place:   "Tempe, Arizona, USA",
-      note:    "",
-      coords:  [33.4242, -111.9281]
-    },
-    {
-      degree:  "PhD, Geosciences & Biological and Agricultural Engineering",
-      school:  "University of Arkansas",
-      place:   "Fayetteville, Arkansas, USA",
-      note:    "In progress — advisor Dr. Rebecca L. Muenich",
-      current: true,
-      coords:  [36.0679, -94.1738]
-    }
-  ],
-
-  /* ----------------------------------------------------------- AFFILIATIONS */
-  /* Where you've worked / been affiliated. Second map layer.
-     EDIT: add NASA DEVELOP node, NASA LifeLines, or any other posts.         */
-  affiliations: [
-    {
-      title:  "University of Arkansas — NSF STEPS Center",
-      blurb:  "Muenich Group · PhD research on AFO mapping & phosphorus sustainability",
-      coords: [36.0764, -94.2088]
-    },
-    {
-      title:  "Arizona State University",
-      blurb:  "CAP LTER land-cover mapping & desert thermal-refuge research",
-      coords: [33.4242, -111.9281]
-    }
-  ],
 
   /* ------------------------------------------------------------------ ABOUT */
   about: {
@@ -313,13 +256,13 @@ const SITE = {
 
   /* --------------------------------------------- ACHIEVEMENTS & AWARDS */
   honors: [
-    { tag: "2024",       title: "GeoScienceWorld Diversity & Representation Award", blurb: "Inaugural recipient. A $5,000 scholarship recognizing graduate students advancing equity in the Earth sciences; winning essay published in Lithosphere." },
+    { tag: "2024",       title: "GeoScienceWorld Grad Scholar Award", blurb: "Inaugural recipient. A $5,000 scholarship recognizing graduate students advancing equity in the Earth sciences; winning essay published in Lithosphere." },
     { tag: "Fellowship", title: "NASA LifeLines Fellow",        blurb: "Developing open-access data studio packages that make Earth-observation data actionable for decision-makers without geospatial expertise." },
     { tag: "2023",       title: "Esri StoryMaps Competition — Top 10 Finalist", blurb: "Selected among the top ten in the student category for \'Serpent Sanctuaries\', mapping Western Diamondback rattlesnake habitat and connectivity across central Arizona." },
     { tag: "Program",    title: "NASA DEVELOP",                 blurb: "National capacity-building program. On the Summer 2023 Kankakee Water Resources team with Constellation Nuclear and the USGS, testing whether Earth observation could detect the aquatic vegetation that clogs power-plant intakes." },
     { tag: "Center",     title: "NSF STEPS Graduate Researcher",blurb: "Science and Technologies for Phosphorus Sustainability Center — an NSF-funded national research center (award CBET-2019435)." },
     { tag: "Grant",      title: "ASPRS Student Presentation Grant", blurb: "Awarded for presenting managed-aquifer-recharge water-level analysis using PlanetScope imagery, with complimentary ASPRS membership." },
-    { tag: "Program",    title: "IEEE GRSS IDEA Program",       blurb: "Professional-development support for women and underrepresented students advancing degrees in geoscience and remote sensing." }
+    { tag: "Research Grant",    title: "CAGIS Student Award",       blurb: "Research grant awarded to grad students pursuing research in geoscience and remote sensing." }
   ],
 
   /* ---------------------------------------------------------------- CONTACT */
