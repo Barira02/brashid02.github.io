@@ -38,9 +38,9 @@ const SITE = {
     // EDIT: swap the search-page links below for your real profile URLs
     links: {
       linkedin:     "https://www.linkedin.com/in/brashid02/",
-      scholar:      "https://scholar.google.com/scholar?q=%22Barira+Rashid%22",
+      scholar:      "https://scholar.google.com/citations?user=Sm7FDpQAAAAJ&hl=en&oi=ao",
       researchgate: "https://www.researchgate.net/profile/Barira-Rashid",
-      orcid:        "https://orcid.org/orcid-search/search?searchQuery=Barira%20Rashid"
+      orcid:        "https://orcid.org/0000-0002-4601-1675"
     },
 
     // optional: put a PDF at assets/cv.pdf and set this to "assets/cv.pdf"
@@ -94,7 +94,7 @@ const SITE = {
      EDIT: add NASA DEVELOP node, NASA LifeLines, or any other posts.         */
   affiliations: [
     {
-      title:  "University of Arkansas — NSF STEPS Center",
+      title:  "University of Arkansas & NSF STEPS Center",
       blurb:  "Muenich Group · PhD research on AFO mapping & phosphorus sustainability",
       coords: [36.0764, -94.2088]
     },
@@ -138,7 +138,7 @@ const SITE = {
     },
     {
       icon:  "globe",
-      title: "Earth observation for equity",
+      title: "Earth observation for Humanitarian Purposes",
       blurb: "Building open, decision-ready tools through NASA LifeLines that put satellite data — on food security and landslide risk — into the hands of frontline and underserved communities.",
       tag:   "NASA LifeLines Fellowship"
     }
@@ -313,13 +313,14 @@ const SITE = {
 
   /* --------------------------------------------- ACHIEVEMENTS & AWARDS */
   honors: [
-    { tag: "2024",       title: "GeoScienceWorld Diversity & Representation Award", blurb: "Inaugural recipient. A $5,000 scholarship recognizing graduate students advancing equity in the Earth sciences; winning essay published in Lithosphere." },
+    { tag: "2024",       title: "GeoScienceWorld Grad Scholar Award", blurb: "Inaugural recipient. A $5,000 scholarship recognizing graduate students advancing equity in the Earth sciences; winning essay published in Lithosphere." },
     { tag: "Fellowship", title: "NASA LifeLines Fellow",        blurb: "Developing open-access data studio packages that make Earth-observation data actionable for decision-makers without geospatial expertise." },
     { tag: "2023",       title: "Esri StoryMaps Competition — Top 10 Finalist", blurb: "Selected among the top ten in the student category for \'Serpent Sanctuaries\', mapping Western Diamondback rattlesnake habitat and connectivity across central Arizona." },
     { tag: "Program",    title: "NASA DEVELOP",                 blurb: "National capacity-building program. On the Summer 2023 Kankakee Water Resources team with Constellation Nuclear and the USGS, testing whether Earth observation could detect the aquatic vegetation that clogs power-plant intakes." },
     { tag: "Center",     title: "NSF STEPS Graduate Researcher",blurb: "Science and Technologies for Phosphorus Sustainability Center — an NSF-funded national research center (award CBET-2019435)." },
     { tag: "Grant",      title: "ASPRS Student Presentation Grant", blurb: "Awarded for presenting managed-aquifer-recharge water-level analysis using PlanetScope imagery, with complimentary ASPRS membership." },
-    { tag: "Program",    title: "IEEE GRSS IDEA Program",       blurb: "Professional-development support for women and underrepresented students advancing degrees in geoscience and remote sensing." }
+    { tag: "2025",       title: "Entrepreneurial Fellowship", blurb: "Walton Business School at UARK provide comprehensive training to STEM grad students with interest in entrepreneurship." },
+    { tag: "Research Grant",    title: "CAGIS Scholar Award",       blurb: "Awarded to grad student pursuing research in geoscience and remote sensing." }
   ],
 
   /* ---------------------------------------------------------------- CONTACT */
