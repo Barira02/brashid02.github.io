@@ -64,6 +64,21 @@
       '<path d="M14 100h0M30 84v32M46 68v64M62 92v16M78 58v84M94 76v48M110 44v112M126 88v24M142 62v76M158 30v140"/>' +
       '<path d="M174 70v60M190 50v100M206 86v28M222 60v80M238 40v120M254 80v40M270 66v68M286 90v20M302 100h0" stroke="#19C7B6"/></g>' +
       '<circle cx="160" cy="100" r="9" fill="#FFC24B"/></svg>',
+    water:
+      '<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="200" fill="#1FB7C4"/>' +
+      '<path d="M0 40 C80 44 100 96 170 104 C240 112 260 160 320 156 L320 190 C255 194 232 146 165 138 C98 130 78 78 0 74 Z" fill="#0E1236"/>' +
+      '<g fill="#FF5C8A" opacity=".95"><ellipse cx="120" cy="86" rx="17" ry="8"/><ellipse cx="168" cy="112" rx="13" ry="6"/>' +
+      '<ellipse cx="214" cy="128" rx="19" ry="8"/><ellipse cx="262" cy="150" rx="11" ry="5"/></g>' +
+      '<rect x="196" y="112" width="46" height="34" fill="none" stroke="#FFC24B" stroke-width="2" stroke-dasharray="4 3"/>' +
+      '<rect x="272" y="30" width="34" height="26" fill="#FFC24B"/></svg>',
+    talk:
+      '<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="200" fill="#141138"/>' +
+      '<rect x="66" y="26" width="188" height="112" fill="#F7F6FB"/>' +
+      '<rect x="84" y="46" width="80" height="8" fill="#C42E63"/>' +
+      '<g fill="#19C7B6"><rect x="84" y="108" width="18" height="14"/><rect x="108" y="94" width="18" height="28"/>' +
+      '<rect x="132" y="78" width="18" height="44"/><rect x="156" y="66" width="18" height="56"/></g>' +
+      '<g fill="#565175"><rect x="188" y="70" width="48" height="5"/><rect x="188" y="82" width="48" height="5"/><rect x="188" y="94" width="34" height="5"/></g>' +
+      '<circle cx="160" cy="164" r="12" fill="#FFC24B"/><path d="M136 190c4-12 12-18 24-18s20 6 24 18Z" fill="#FF5C8A"/></svg>',
     essay:
       '<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="200" fill="#0E1236"/>' +
       '<rect x="70" y="18" width="180" height="164" fill="#F7F6FB"/>' +
@@ -120,11 +135,17 @@
     }
 
     grid.innerHTML = items.map(function (d, i) {
-      var live = d.url && d.url.trim().length;
+      // accept either links:[{label,url}] or a single url/linkLabel
+      var links = (d.links || []).filter(function (l) { return l && l.url && l.url.trim().length; });
+      if (!links.length && d.url && d.url.trim().length) links = [{ label: d.linkLabel || "Open ↗", url: d.url }];
+      var live = links.length > 0;
       var chips = (d.meta || []).map(function (m) { return '<span class="od-chip">' + esc(m) + '</span>'; }).join("");
       var actions = "";
-      if (live) actions += '<a class="od-go" href="' + esc(d.url) + '" target="_blank" rel="noopener">' + esc(d.linkLabel || "Open ↗") + '</a>';
-      else if (d.linkLabel) actions += '<span class="od-pending">Add URL in data.js</span>';
+      if (links.length) {
+        actions += links.map(function (l) {
+          return '<a class="od-go" href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.label) + '</a>';
+        }).join("");
+      } else if (d.linkLabel) actions += '<span class="od-pending">Add URL in data.js</span>';
       if (d.citation && d.citation.trim().length) {
         actions += '<button class="od-cite" type="button" data-i="' + i + '">Copy citation</button>';
       }
@@ -223,19 +244,87 @@
     }).join("");
   }
 
-  /* ------------------------------------------------------------ EDUCATION */
-  function renderEducation() {
-    var el = $("edu-list");
+  /* ------------------------------------------ EDUCATION — GUIDED MAP TOUR */
+  var TOUR = { map: null, markers: [], i: -1 };
+
+  function renderTourList() {
+    var el = $("tour-list");
     if (!el) return;
-    var d = (SITE.qualifications || []).slice();
-    el.innerHTML = d.map(function (x, i) { x._n = i + 1; return x; }).reverse().map(function (x) {
-      return '<div class="edu-item' + (x.current ? " current" : "") + '">' +
-        '<div class="edu-n">' + (x._n < 10 ? "0" + x._n : x._n) + '</div>' +
-        '<div class="edu-deg">' + esc(x.degree) + '</div>' +
-        (x.note ? '<div class="edu-meta">' + esc(x.note) + '</div>' : "") +
-        '<div class="edu-place">' + esc(x.school) + ' · ' + esc(x.place) + '</div>' +
-        '</div>';
+    el.innerHTML = (SITE.qualifications || []).map(function (q, i) {
+      return '<button class="stop" type="button" data-i="' + i + '">' +
+          '<span class="stop-n">' + (i + 1) + '</span>' +
+          '<span class="stop-body">' +
+            '<span class="stop-deg">' + esc(q.degree) + '</span>' +
+            '<span class="stop-school">' + esc(q.school) + '</span>' +
+            (q.note ? '<span class="stop-note">' + esc(q.note) + '</span>' : "") +
+            '<span class="stop-place">' + esc(q.place) + '</span>' +
+          '</span>' +
+        '</button>';
     }).join("");
+    el.querySelectorAll(".stop").forEach(function (b) {
+      b.addEventListener("click", function () { goToStop(+b.getAttribute("data-i")); });
+    });
+  }
+
+  function goToStop(i) {
+    var Q = SITE.qualifications || [];
+    if (!Q[i] || !TOUR.map) return;
+    TOUR.i = i;
+    document.querySelectorAll("#tour-list .stop").forEach(function (b, k) {
+      b.classList.toggle("active", k === i);
+    });
+    TOUR.map.flyTo(Q[i].coords, 12, { duration: 1.4 });
+    if (TOUR.markers[i]) TOUR.markers[i].openPopup();
+    var t = $("tour-title"), c = $("tour-coords");
+    if (t) t.innerHTML = "Stop " + (i + 1) + " of " + Q.length + " · <b>" + esc(Q[i].school) + "</b>";
+    if (c) c.textContent = Q[i].coords[0].toFixed(3) + ", " + Q[i].coords[1].toFixed(3);
+  }
+
+  function tourOverview() {
+    var Q = SITE.qualifications || [];
+    if (!TOUR.map || !Q.length) return;
+    TOUR.i = -1;
+    document.querySelectorAll("#tour-list .stop").forEach(function (b) { b.classList.remove("active"); });
+    TOUR.map.closePopup();
+    TOUR.map.flyToBounds(L.latLngBounds(Q.map(function (q) { return q.coords; })).pad(0.35), { duration: 1.4 });
+    var t = $("tour-title"), c = $("tour-coords");
+    if (t) t.innerHTML = "Overview · <b>all " + Q.length + " stops</b>";
+    if (c) c.textContent = "click a stop to fly";
+  }
+
+  function initTourMap() {
+    var el = $("tour-map");
+    if (!el || typeof L === "undefined") return;
+    var Q = SITE.qualifications || [];
+    if (!Q.length) return;
+
+    TOUR.map = L.map("tour-map", { scrollWheelZoom: false, attributionControl: false });
+    L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                { maxZoom: 19, subdomains: "abcd" }).addTo(TOUR.map);
+    L.control.scale({ imperial: true, metric: true, position: "bottomleft" }).addTo(TOUR.map);
+
+    for (var j = 0; j < Q.length - 1; j++) {
+      L.polyline(arc(Q[j].coords, Q[j + 1].coords),
+        { color: "#C42E63", weight: 1.6, opacity: .6, dashArray: "5 6" }).addTo(TOUR.map);
+    }
+    TOUR.markers = Q.map(function (q, i) {
+      return L.marker(q.coords, {
+        icon: L.divIcon({ className: "", html: '<div class="pin">' + (i + 1) + "</div>",
+                          iconSize: [22, 22], iconAnchor: [11, 11] })
+      }).addTo(TOUR.map)
+        .bindPopup("<strong>" + esc(q.school) + "</strong><br>" + esc(q.degree) + "<br><em>" + esc(q.place) + "</em>");
+    });
+    TOUR.markers.forEach(function (m, i) { m.on("click", function () { goToStop(i); }); });
+
+    TOUR.map.fitBounds(L.latLngBounds(Q.map(function (q) { return q.coords; })).pad(0.35));
+    tourOverview();
+
+    var prev = $("tour-prev"), next = $("tour-next"), ov = $("tour-overview");
+    if (prev) prev.addEventListener("click", function () { goToStop((TOUR.i <= 0 ? Q.length : TOUR.i) - 1); });
+    if (next) next.addEventListener("click", function () { goToStop((TOUR.i + 1) % Q.length); });
+    if (ov)   ov.addEventListener("click", tourOverview);
+
+    setTimeout(function () { TOUR.map.invalidateSize(); }, 250);
   }
 
   /* -------------------------------------------------------------- CONTACT */
@@ -378,12 +467,12 @@
   function boot() {
     if (typeof SITE === "undefined") { console.error("data.js failed to load"); return; }
     renderHero(); renderSciComm(); renderAbout(); renderResearch();
-    renderPubs(); renderHonors(); renderEducation(); renderContact();
+    renderPubs(); renderHonors(); renderTourList(); renderContact();
     initNav(); initMapKey(); initReveal();
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();
 
-  window.addEventListener("load", initMap);
+  window.addEventListener("load", function () { initMap(); initTourMap(); });
 })();

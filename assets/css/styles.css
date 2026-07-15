@@ -134,6 +134,7 @@ nav.scrolled .nav-links a:hover{color:var(--rose-ink);}
 .od-badge.t-story-map{background:var(--rose);color:#2A0A16;}
 .od-badge.t-podcast{background:var(--gold);color:#3A2600;}
 .od-badge.t-essay{background:#EEEBF8;color:var(--indigo);}
+.od-badge.t-report{background:var(--indigo);color:#fff;}
 .od-badge.t-talk{background:#fff;color:var(--indigo);}
 .od-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
 .od-card{border:1px solid var(--line);background:var(--paper-2);display:flex;flex-direction:column;
@@ -149,6 +150,7 @@ nav.scrolled .nav-links a:hover{color:var(--rose-ink);}
   color:var(--ink-soft);border:1px solid var(--line);background:var(--line-2);padding:.25em .5em;}
 .od-card p{margin:0;color:var(--ink-soft);font-size:.9rem;line-height:1.5;flex:1;}
 .od-actions{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .9rem;margin-top:1.1rem;}
+.od-actions .od-go + .od-go{padding-left:.9rem;border-left:1px solid var(--line);}
 .od-go{font-family:var(--mono);font-size:.7rem;letter-spacing:.05em;color:var(--rose-ink);
   border-bottom:1px solid transparent;transition:color .15s,border-color .15s;}
 .od-card.live:hover .od-go{color:var(--gold-ink);border-color:var(--gold-ink);}
@@ -208,16 +210,34 @@ nav.scrolled .nav-links a:hover{color:var(--rose-ink);}
 .out .todo{display:inline-block;margin-top:.5rem;font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;color:var(--gold-ink);}
 a.todo:hover{border-bottom:1px solid var(--gold-ink);}
 
-/* ============================= EDUCATION ================================= */
-.edu-item{position:relative;padding:0 0 32px 34px;border-left:1px solid var(--line);}
-.edu-item:last-child{border-left-color:transparent;padding-bottom:0;}
-.edu-item::before{content:"";position:absolute;left:-6px;top:5px;width:11px;height:11px;background:var(--paper);
-  border:2px solid var(--rose);border-radius:50%;}
-.edu-item.current::before{background:var(--rose);}
-.edu-n{font-family:var(--mono);font-size:.66rem;color:var(--rose-ink);letter-spacing:.1em;}
-.edu-deg{font-family:var(--display);font-weight:600;font-size:1.18rem;}
-.edu-meta{color:var(--ink-soft);}
-.edu-place{font-family:var(--mono);font-size:.74rem;letter-spacing:.05em;color:var(--ink-soft);margin-top:.2rem;text-transform:uppercase;}
+/* ======================== EDUCATION — MAP TOUR =========================== */
+.tour{display:grid;grid-template-columns:.85fr 1.15fr;gap:32px;align-items:start;}
+.tour-list{display:flex;flex-direction:column;gap:10px;}
+.stop{display:flex;gap:14px;text-align:left;background:var(--paper-2);border:1px solid var(--line);
+  padding:16px 16px;cursor:pointer;font-family:var(--body);transition:border-color .18s,background .18s,transform .18s;}
+.stop:hover{border-color:var(--rose);transform:translateX(3px);}
+.stop.active{border-color:var(--rose);background:#FFF1F5;}
+.stop.active .stop-n{background:var(--rose);color:#2A0A16;border-color:var(--rose);}
+.stop-n{flex:none;width:26px;height:26px;border-radius:50%;border:1.5px solid var(--line);
+  display:grid;place-items:center;font-family:var(--mono);font-size:.72rem;font-weight:600;color:var(--ink-soft);
+  transition:all .18s;}
+.stop-body{display:flex;flex-direction:column;gap:2px;}
+.stop-deg{font-family:var(--display);font-weight:600;font-size:1.02rem;line-height:1.2;}
+.stop-school{color:var(--ink-soft);font-size:.92rem;}
+.stop-note{color:var(--rose-ink);font-size:.82rem;}
+.stop-place{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin-top:.25rem;}
+
+.tour-map-col{position:sticky;top:90px;}
+.tour-frame{border:1px solid var(--line);background:var(--paper-2);}
+.tour-cap{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:10px 13px;
+  border-bottom:1px solid var(--line);font-family:var(--mono);font-size:.67rem;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink-soft);}
+.tour-cap b{color:var(--rose-ink);}
+#tour-map{height:460px;width:100%;background:#EBE8F6;z-index:1;}
+.tour-nav{display:flex;gap:8px;margin-top:10px;}
+.tour-nav button{flex:1;font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;
+  background:none;border:1px solid var(--line);color:var(--ink-soft);padding:.6em .5em;cursor:pointer;transition:all .16s;}
+.tour-nav button:hover{border-color:var(--rose);color:var(--rose-ink);}
 
 /* ============================== CONTACT ================================== */
 .contact{color:#EDEAFB;border:none;background:radial-gradient(120% 120% at 20% 100%, var(--indigo-glow), var(--indigo) 55%);}
@@ -251,11 +271,14 @@ a.todo:hover{border-bottom:1px solid var(--gold-ink);}
   .hero-grid,.about-grid{grid-template-columns:1fr;gap:38px;}
   .cards,.honors,.od-grid,.out-list{grid-template-columns:1fr;}
   #journey{height:340px;}
+  .tour{grid-template-columns:1fr;gap:20px;}
+  .tour-map-col{position:static;}
+  #tour-map{height:320px;}
   .pub{grid-template-columns:1fr;gap:.5rem;}
   .pub .yr{padding-top:0;}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;}
   .reveal{opacity:1;transform:none;transition:none;}
-  .btn:hover,.btn.solid:hover,.od-card.live:hover{transform:none;}
+  .btn:hover,.btn.solid:hover,.od-card.live:hover,.stop:hover{transform:none;}
 }

@@ -146,89 +146,138 @@ const SITE = {
 
   /* ---------------------------------------------- SCIENCE COMMUNICATION */
   /* One home for everything that isn't a journal paper.
-     type:      "Story map" | "Podcast" | "Essay" | "Dataset" | "Talk"
-                (filter buttons are generated automatically from the types used)
-     url:       "" => "link pending" badge instead of a dead link
-     citation:  "" => hides the "Copy citation" button for that card
-     meta:      small chips under the title
-     thumb:     "lulc" | "terrain" | "fields" | "globe" | "wave" | "essay"    */
+     type:     "Story map" | "Podcast" | "Essay" | "Dataset" | "Report" | "Talk"
+               (filter buttons are generated automatically from the types used)
+     links:    [{label, url}]  — use for one OR several buttons on a card
+     citation: "" => hides that card's "Copy citation" button
+     meta:     small chips under the title
+     thumb:    "lulc" | "terrain" | "fields" | "globe" | "wave" | "essay" | "water" | "talk"  */
   scicomm: [
     {
-      type:     "Dataset",
-      kicker:   "Environmental Data Initiative · CAP LTER",
-      title:    "Land use & land cover classification of the CAP LTER study area",
-      blurb:    "Extends the CAP LTER long-term LULC series — previously 1985 to 2010 at five-year intervals — with new maps for 2015 and 2020, produced by object-based classification of Landsat imagery. Built to support research on urban sprawl, urban heat islands, and outdoor water consumption across central Arizona.",
-      meta:     ["30 m", "Landsat", "2015 · 2020", "ver 2"],
-      url:      "https://doi.org/10.6073/pasta/bf18e5856215bd2d4dab3b024ba87a7e",
-      linkLabel:"Open dataset ↗",
+      type:   "Story map",
+      kicker: "ArcGIS StoryMaps · 2026",
+      title:  "Geospatial Narratives: The Power of GIS Research",
+      blurb:  "Charting a course for a sustainable world — a walk through what GIS research can see, and why it matters beyond the discipline.",
+      meta:   ["2026", "Featured"],
+      links:  [{ label: "Open the story ↗", url: "https://storymaps.arcgis.com/stories/42f79c9264694f269a0581cf37b78dbc" }],
+      citation: "",
+      thumb:  "globe"
+    },
+    {
+      type:   "Story map",
+      kicker: "ArcGIS StoryMaps · 2023",
+      title:  "Serpent Sanctuaries: Rattlesnake Habitat in Central Arizona",
+      blurb:  "Western Diamondback rattlesnake habitat and connectivity across central Arizona–Phoenix, unveiled through advanced GIS modeling. Top-ten finalist, student category, Esri StoryMaps Competition 2023.",
+      meta:   ["2023", "Esri top-10 finalist"],
+      links:  [{ label: "Open the story ↗", url: "https://storymaps.arcgis.com/stories/7e4dd52834234beb9f952aba077f4732" }],
+      citation: "",
+      thumb:  "terrain"
+    },
+    {
+      type:   "Story map",
+      kicker: "NASA LifeLines · 2025",
+      title:  "Seeing Risk, Saving Lives: NASA Lifelines for Landslides",
+      blurb:  "The landslide data studio package as a story — how Earth observation turns slope, rain, and soil into a warning someone can act on.",
+      meta:   ["2025", "Data studio"],
+      links:  [{ label: "Open the story ↗", url: "https://storymaps.arcgis.com/stories/e12e457e8ed443bcbcfa2f2e6f9a8e2d" }],
+      citation: "",
+      thumb:  "terrain"
+    },
+    {
+      type:   "Podcast",
+      kicker: "PhosForUs",
+      title:  "PhosForUs Podcast",
+      blurb:  "Co-created podcast translating phosphorus science and sustainability for a general audience — the element you never think about, and the water-quality crisis it quietly drives.",
+      meta:   ["Co-host", "NSF STEPS"],
+      links:  [
+        { label: "Spotify ↗",        url: "https://open.spotify.com/show/5nECIx73y9bkGT8RUQkZSQ" },
+        { label: "Apple Podcasts ↗", url: "https://podcasts.apple.com/us/podcast/phosforus/id1687822753" }
+      ],
+      citation: "",
+      thumb:  "wave"
+    },
+    {
+      type:   "Essay",
+      kicker: "Lithosphere · GeoScienceWorld",
+      title:  "Navigating Earth Sciences: Addressing Equity and Sustainability Through Interdisciplinary Endeavors",
+      blurb:  "The essay that won the inaugural GeoScienceWorld Diversity & Representation Award — on who gets to do Earth science, and what the field loses when the answer stays narrow.",
+      meta:   ["2024", "Award essay"],
+      links:  [{ label: "Read the essay ↗", url: "https://doi.org/10.2113/2024/lithosphere_2024_198" }],
+      citation: "Rashid, B. 2024. Navigating Earth Sciences: Addressing Equity and Sustainability Through Interdisciplinary Endeavors. Lithosphere, 2024(3). https://doi.org/10.2113/2024/lithosphere_2024_198",
+      thumb:  "essay"
+    },
+    {
+      type:   "Essay",
+      kicker: "Journal of Biological Engineering · 2026",
+      title:  "Beyond linearity: reimagining AI as a participant in circular bioeconomies",
+      blurb:  "A rethink of AI's role in circular systems — not as an optimiser bolted onto a linear pipeline, but as a participant in the loop itself.",
+      meta:   ["2026", "20(1):52"],
+      links:  [{ label: "Read ↗", url: "https://doi.org/10.1186/s13036-026-00672-7" }],
+      citation: "Muthukumar A, Rashid B, Yang L. Beyond linearity: reimagining AI as a participant in circular bioeconomies. J Biol Eng. 2026 Mar 27;20(1):52. doi: 10.1186/s13036-026-00672-7. PMID: 41896981; PMCID: PMC13023148.",
+      thumb:  "essay"
+    },
+    {
+      type:   "Dataset",
+      kicker: "Environmental Data Initiative · CAP LTER",
+      title:  "Land use & land cover classification of the CAP LTER study area",
+      blurb:  "Extends the CAP LTER long-term LULC series — previously 1985 to 2010 at five-year intervals — with new maps for 2015 and 2020, produced by object-based classification of Landsat imagery. Built to support research on urban sprawl, urban heat islands, and outdoor water consumption across central Arizona.",
+      meta:   ["30 m", "Landsat", "2015 · 2020", "ver 2"],
+      links:  [{ label: "Open dataset ↗", url: "https://doi.org/10.6073/pasta/bf18e5856215bd2d4dab3b024ba87a7e" }],
       citation: "Sabu, S., A. Frazier, and B. Rashid. 2023. Land use and land cover (LULC) classification of the CAP LTER study area (central Arizona, USA) using Landsat imagery: 2015 and 2020 ver 2. Environmental Data Initiative. https://doi.org/10.6073/pasta/bf18e5856215bd2d4dab3b024ba87a7e",
-      thumb:    "lulc"
+      thumb:  "lulc"
     },
     {
-      type:     "Essay",
-      kicker:   "Lithosphere · GeoScienceWorld",
-      title:    "Navigating Earth Sciences: addressing equity and sustainability",
-      blurb:    "The essay that won the inaugural GeoScienceWorld Diversity & Representation Award — on who gets to do Earth science, and what the field loses when the answer stays narrow.",
-      meta:     ["2024", "Award essay"],
-      url:      "https://pubs.geoscienceworld.org/gsw/lithosphere",
-      linkLabel:"Read the essay ↗",
+      type:   "Dataset",
+      kicker: "NASA LifeLines",
+      title:  "Agriculture, Food Security & Environmental Monitoring",
+      blurb:  "An open data studio package turning Earth-observation data into food-security insight for decision-makers without geospatial training.",
+      meta:   ["Open access", "Data studio"],
+      links:  [{ label: "Open package ↗", url: "https://nasalifelines.org/hfs-data-series/agriculture-food-security-environmental-monitoring-applications/" }],
       citation: "",
-      thumb:    "essay"
+      thumb:  "fields"
     },
     {
-      type:     "Podcast",
-      kicker:   "PhosForUs",
-      title:    "PhosForUs Podcast",
-      blurb:    "Co-created podcast translating phosphorus science and sustainability for a general audience — the element you never think about, and the water quality crisis it quietly drives.",
-      meta:     ["Co-host", "NSF STEPS"],
-      url:      "",                 // EDIT: paste the podcast link
-      linkLabel:"Listen ↗",
+      type:   "Dataset",
+      kicker: "NASA LifeLines",
+      title:  "Landslide Risk and Monitoring",
+      blurb:  "An open data studio package mapping landslide susceptibility from Earth-observation data, developed with Earth-science review boards, USGS, and humanitarian NGOs.",
+      meta:   ["Open access", "Data studio"],
+      links:  [{ label: "Open package ↗", url: "https://nasalifelines.org/hfs-data-series/landslide-risk-and-monitoring/" }],
       citation: "",
-      thumb:    "wave"
+      thumb:  "terrain"
     },
     {
-      type:     "Story map",
-      kicker:   "ArcGIS StoryMaps",
-      title:    "EDIT: your story map title",
-      blurb:    "EDIT: one or two sentences on what this story map walks a reader through. Copy this whole block to add more story maps.",
-      meta:     ["Story map"],
-      url:      "",                 // EDIT: Share → Everyone (public), then paste the link
-      linkLabel:"Open the story ↗",
-      citation: "",
-      thumb:    "globe"
+      type:   "Report",
+      kicker: "NASA DEVELOP · Summer 2023",
+      title:  "Kankakee Water Resources: monitoring temperature and vegetation to detect river flow impediments",
+      blurb:  "With Constellation Nuclear and the USGS: can satellites see the floating vegetation mats that clog power-plant water intakes on the Kankakee River? Landsat, Sentinel-2, PlanetScope and WorldView-3 tested against grassing events — vegetation was detectable at 30 m, but revisit time proved the binding constraint.",
+      meta:   ["NASA DEVELOP", "Landsat · Sentinel-2", "USGS partner"],
+      links:  [
+        { label: "Technical report ↗", url: "https://ntrs.nasa.gov/citations/20230014219" },
+        { label: "Presentation ↗",     url: "https://ntrs.nasa.gov/api/citations/20230011112/downloads/2023Sum_PUP_KankakeeWater_Presentation_FD_v2.pdf" }
+      ],
+      citation: "Smedsrud, M., H. Hoffmeister, O. Orimolade, and B. Rashid. 2023. Kankakee Water Resources: Monitoring Temperature and Vegetation to Detect River Flow Impediments at Energy Intake Structures. NASA DEVELOP Summer 2023 Technical Report, Document ID 20230014219.",
+      thumb:  "water"
     },
     {
-      type:     "Dataset",
-      kicker:   "NASA LifeLines",
-      title:    "Landslide Risk Data Package",
-      blurb:    "An open data studio package mapping landslide susceptibility from Earth-observation data, developed with Earth-science review boards, USGS, and humanitarian NGOs.",
-      meta:     ["Open access", "Data studio"],
-      url:      "",                 // EDIT
-      linkLabel:"Open package ↗",
+      type:   "Talk",
+      kicker: "ASABE · Invited talk",
+      title:  "AI and circularity: reflections",
+      blurb:  "An invited talk on what artificial intelligence can and can't contribute to circular systems thinking.",
+      meta:   ["Invited", "ASABE"],
+      links:  [{ label: "View ↗", url: "https://arcg.is/0XyGqH0" }],
       citation: "",
-      thumb:    "terrain"
+      thumb:  "talk"
     },
     {
-      type:     "Dataset",
-      kicker:   "NASA LifeLines",
-      title:    "Food Security Data Package",
-      blurb:    "An open data studio package turning Earth-observation data into food-security insight for decision-makers without geospatial training.",
-      meta:     ["Open access", "Data studio"],
-      url:      "",                 // EDIT
-      linkLabel:"Open package ↗",
+      type:   "Talk",
+      kicker: "Outreach",
+      title:  "K–12 school outreach",
+      blurb:  "Introducing school students to Earth observation and GIS — where satellites come from, and what they let you see about your own town.",
+      meta:   ["K–12", "Outreach"],
+      links:  [{ label: "View ↗", url: "https://arcg.is/0aHOXL" }],
       citation: "",
-      thumb:    "fields"
-    },
-    {
-      type:     "Talk",
-      kicker:   "Outreach",
-      title:    "Talks & school outreach",
-      blurb:    "Invited speaker events and K–12 engagement introducing students to Earth observation and GIS.",
-      meta:     ["K–12", "Invited talks"],
-      url:      "",
-      linkLabel:"",
-      citation: "",
-      thumb:    "fields"
+      thumb:  "talk"
     }
   ],
 
@@ -266,7 +315,8 @@ const SITE = {
   honors: [
     { tag: "2024",       title: "GeoScienceWorld Diversity & Representation Award", blurb: "Inaugural recipient. A $5,000 scholarship recognizing graduate students advancing equity in the Earth sciences; winning essay published in Lithosphere." },
     { tag: "Fellowship", title: "NASA LifeLines Fellow",        blurb: "Developing open-access data studio packages that make Earth-observation data actionable for decision-makers without geospatial expertise." },
-    { tag: "Program",    title: "NASA DEVELOP",                 blurb: "National capacity-building program; applied Earth-observation data to develop an automated method for detecting aquatic vegetation." },
+    { tag: "2023",       title: "Esri StoryMaps Competition — Top 10 Finalist", blurb: "Selected among the top ten in the student category for \'Serpent Sanctuaries\', mapping Western Diamondback rattlesnake habitat and connectivity across central Arizona." },
+    { tag: "Program",    title: "NASA DEVELOP",                 blurb: "National capacity-building program. On the Summer 2023 Kankakee Water Resources team with Constellation Nuclear and the USGS, testing whether Earth observation could detect the aquatic vegetation that clogs power-plant intakes." },
     { tag: "Center",     title: "NSF STEPS Graduate Researcher",blurb: "Science and Technologies for Phosphorus Sustainability Center — an NSF-funded national research center (award CBET-2019435)." },
     { tag: "Grant",      title: "ASPRS Student Presentation Grant", blurb: "Awarded for presenting managed-aquifer-recharge water-level analysis using PlanetScope imagery, with complimentary ASPRS membership." },
     { tag: "Program",    title: "IEEE GRSS IDEA Program",       blurb: "Professional-development support for women and underrepresented students advancing degrees in geoscience and remote sensing." }

@@ -110,13 +110,26 @@
   </div>
 </section>
 
-<!-- EDUCATION -->
+<!-- EDUCATION — GUIDED MAP TOUR -->
 <section id="education">
   <div class="wrap reveal">
     <div class="legend hollow">Education</div>
     <h2 class="section-title">Two countries, four <em>qualifications</em></h2>
-    <p class="section-sub">The same stops you can click on the map at the top.</p>
-    <div class="edu" id="edu-list"></div>
+    <p class="section-sub">A guided tour — click a stop and the map flies there.</p>
+    <div class="tour">
+      <div class="tour-list" id="tour-list"></div>
+      <div class="tour-map-col">
+        <div class="tour-frame">
+          <div class="tour-cap"><span id="tour-title">Overview</span><span id="tour-coords" class="mono"></span></div>
+          <div id="tour-map"></div>
+        </div>
+        <div class="tour-nav">
+          <button type="button" id="tour-prev">← Prev</button>
+          <button type="button" id="tour-overview">Overview</button>
+          <button type="button" id="tour-next">Next →</button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
