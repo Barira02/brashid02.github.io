@@ -39,30 +39,43 @@ const SITE = {
     cv: ""
   },
 
-  /* ------------------------------------------------------------- STORY MAPS */
-  /* Paste each public URL into url:. Empty url => tasteful "link pending" card.
-     thumb options: "fields" | "terrain" | "globe"                             */
-  storymaps: [
+   /* -------------------------------------------------------------- OPEN DATA */
+  /* Published datasets & open packages.
+     url:       "" => card shows a tidy "link pending" state instead of a dead link
+     citation:  "" => the "Copy citation" button is hidden for that card
+     meta:      short chips shown under the title (resolution, sensor, years...)
+     thumb:     "lulc" | "terrain" | "fields" | "globe"
+     Reorder cards by moving whole { ... } blocks.                              */
+  opendata: [
     {
-      kicker: "NASA LifeLines",
-      title:  "Food Security Data Studio",
-      blurb:  "An open data studio package turning Earth-observation data into food-security insight for decision-makers without geospatial training.",
-      url:    "",
-      thumb:  "fields"
+      kicker:   "Environmental Data Initiative · CAP LTER",
+      title:    "Land use & land cover classification of the CAP LTER study area",
+      blurb:    "Extends the CAP LTER long-term LULC series — previously 1985 to 2010 at five-year intervals — with new maps for 2015 and 2020, produced by object-based classification of Landsat imagery. Built to support research on urban sprawl, urban heat islands, and outdoor water consumption across central Arizona.",
+      meta:     ["30 m", "Landsat", "2015 · 2020", "ver 2"],
+      url:      "https://doi.org/10.6073/pasta/bf18e5856215bd2d4dab3b024ba87a7e",
+      linkLabel:"Open dataset ↗",
+      citation: "Sabu, S., A. Frazier, and B. Rashid. 2023. Land use and land cover (LULC) classification of the CAP LTER study area (central Arizona, USA) using Landsat imagery: 2015 and 2020 ver 2. Environmental Data Initiative. https://doi.org/10.6073/pasta/bf18e5856215bd2d4dab3b024ba87a7e",
+      thumb:    "lulc"
     },
     {
-      kicker: "NASA LifeLines",
-      title:  "Landslide Risk Data Studio",
-      blurb:  "Mapping landslide susceptibility from satellite data, built with Earth-science review boards, USGS, and humanitarian NGOs.",
-      url:    "",
-      thumb:  "terrain"
+      kicker:   "NASA LifeLines",
+      title:    "Landslide Risk Data Package",
+      blurb:    "An open data studio package mapping landslide susceptibility from Earth-observation data, developed with Earth-science review boards, USGS, and humanitarian NGOs.",
+      meta:     ["Open access", "Data studio"],
+      url:      "",                 // EDIT: paste the package / repository URL
+      linkLabel:"Open package ↗",
+      citation: "https://nasalifelines.org/hfs-data-series/landslide-risk-and-monitoring/",                 // EDIT: optional — paste a citation to enable the copy button
+      thumb:    "terrain"
     },
     {
-      kicker: "NSF STEPS",
-      title:  "Mapping Animal Feeding Operations",
-      blurb:  "How deep learning finds the farms that regulators miss — and why phosphorus makes it matter for every downstream river.",
-      url:    "",
-      thumb:  "globe"
+      kicker:   "NASA LifeLines",
+      title:    "Food Security Data Package",
+      blurb:    "An open data studio package turning Earth-observation data into food-security insight for decision-makers without geospatial training.",
+      meta:     ["Open access", "Data studio"],
+      url:      "https://nasalifelines.org/hfs-data-series/agriculture-food-security-environmental-monitoring-applications/",                 // EDIT: paste the package / repository URL
+      linkLabel:"Open package ↗",
+      citation: "",                 // EDIT
+      thumb:    "fields"
     }
   ],
 
