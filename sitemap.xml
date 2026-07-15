@@ -2,7 +2,7 @@
 <!-- EDIT: replace YOURUSERNAME with your GitHub username (or custom domain) -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://YOURUSERNAME.github.io/</loc>
+    <loc>https://barira02.github.io/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
