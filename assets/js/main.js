@@ -287,9 +287,16 @@
     document.querySelectorAll("#tour-list .stop").forEach(function (b) { b.classList.remove("active"); });
     TOUR.map.closePopup();
     TOUR.map.flyToBounds(L.latLngBounds(Q.map(function (q) { return q.coords; })).pad(0.35), { duration: 1.4 });
+    var countries = [];
+    Q.forEach(function (q) {
+      var c2 = String(q.place).split(",").pop().trim();
+      if (countries.indexOf(c2) === -1) countries.push(c2);
+    });
+    var total = 0;
+    for (var i = 0; i < Q.length - 1; i++) total += haversine(Q[i].coords, Q[i + 1].coords);
     var t = $("tour-title"), c = $("tour-coords");
-    if (t) t.innerHTML = "Overview · <b>all " + Q.length + " stops</b>";
-    if (c) c.textContent = "click a stop to fly";
+    if (t) t.innerHTML = "Overview · <b>" + Q.length + " stops, " + countries.length + " countries</b>";
+    if (c) c.textContent = (Math.round(total / 100) * 100).toLocaleString() + " km travelled";
   }
 
   function initTourMap() {
@@ -315,6 +322,22 @@
         .bindPopup("<strong>" + esc(q.school) + "</strong><br>" + esc(q.degree) + "<br><em>" + esc(q.place) + "</em>");
     });
     TOUR.markers.forEach(function (m, i) { m.on("click", function () { goToStop(i); }); });
+
+    // affiliations as a second, toggleable layer — moved here from the old hero map
+    var A = SITE.affiliations || [];
+    var lab = SITE.mapLabels || {};
+    if (A.length) {
+      var aLayer = L.layerGroup();
+      A.forEach(function (a) {
+        L.marker(a.coords, {
+          icon: L.divIcon({ className: "", html: '<div class="pin site">◆</div>',
+                            iconSize: [22, 22], iconAnchor: [11, 11] })
+        }).addTo(aLayer).bindPopup("<strong>" + esc(a.title) + "</strong><br>" + esc(a.blurb));
+      });
+      var overlays = {};
+      overlays[lab.affiliations || "Affiliations"] = aLayer;
+      L.control.layers(null, overlays, { collapsed: false, position: "topright" }).addTo(TOUR.map);
+    }
 
     TOUR.map.fitBounds(L.latLngBounds(Q.map(function (q) { return q.coords; })).pad(0.35));
     tourOverview();
@@ -379,67 +402,6 @@
     return pts;
   }
 
-  function initMap() {
-    var el = $("journey");
-    if (!el) return;
-    if (typeof L === "undefined") {
-      var s = $("jmap-status");
-      if (s) s.textContent = "Map loads when online";
-      return;
-    }
-    var Q = SITE.qualifications || [], A = SITE.affiliations || [];
-    var lab = SITE.mapLabels || { qualifications: "Qualifications", affiliations: "Affiliations" };
-
-    // countries + distance, both derived from the data so they can't go stale
-    var countries = [];
-    Q.forEach(function (q) {
-      var c = String(q.place).split(",").pop().trim();
-      if (countries.indexOf(c) === -1) countries.push(c);
-    });
-    var cap = $("jmap-count");
-    if (cap) cap.innerHTML = Q.length + " qualifications · <b>" + countries.length + " countries</b>";
-
-    var total = 0;
-    for (var i = 0; i < Q.length - 1; i++) total += haversine(Q[i].coords, Q[i + 1].coords);
-    var dist = $("jmap-dist");
-    if (dist) dist.textContent = (Math.round(total / 100) * 100).toLocaleString() + " km";
-
-    var map = L.map("journey", { scrollWheelZoom: true, attributionControl: false, worldCopyJump: true })
-                .setView([36, -25], 2);
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
-                { maxZoom: 19, subdomains: "abcd" }).addTo(map);
-    L.control.scale({ imperial: true, metric: true, position: "bottomleft" }).addTo(map);
-
-    function pin(n, cls) {
-      return L.divIcon({ className: "", html: '<div class="pin ' + (cls || "") + '">' + n + "</div>",
-                         iconSize: [22, 22], iconAnchor: [11, 11] });
-    }
-
-    var qLayer = L.layerGroup(), aLayer = L.layerGroup();
-
-    for (var j = 0; j < Q.length - 1; j++) {
-      L.polyline(arc(Q[j].coords, Q[j + 1].coords),
-        { color: "#FF5C8A", weight: 1.6, opacity: .75, dashArray: "5 6" }).addTo(qLayer);
-    }
-    Q.forEach(function (q, k) {
-      L.marker(q.coords, { icon: pin(k + 1) }).addTo(qLayer)
-       .bindPopup("<strong>" + esc(q.school) + "</strong><br>" + esc(q.degree) + "<br><em>" + esc(q.place) + "</em>");
-    });
-    A.forEach(function (a) {
-      L.marker(a.coords, { icon: pin("◆", "site") }).addTo(aLayer)
-       .bindPopup("<strong>" + esc(a.title) + "</strong><br>" + esc(a.blurb));
-    });
-
-    qLayer.addTo(map);
-    var overlays = {};
-    overlays[lab.qualifications] = qLayer;
-    overlays[lab.affiliations]   = aLayer;
-    L.control.layers(null, overlays, { collapsed: false, position: "topright" }).addTo(map);
-
-    if (Q.length) map.fitBounds(L.latLngBounds(Q.map(function (q) { return q.coords; })).pad(0.35));
-    setTimeout(function () { map.invalidateSize(); }, 250);
-  }
-
   /* --------------------------------------------------------------- REVEAL */
   function initReveal() {
     var els = document.querySelectorAll(".reveal");
@@ -455,24 +417,16 @@
     els.forEach(function (e) { io.observe(e); });
   }
 
-  /* --------------------------------------------------------- MAP KEY LABELS */
-  function initMapKey() {
-    var lab = SITE.mapLabels || {};
-    var a = $("jkey-q"), b = $("jkey-a");
-    if (a) a.textContent = lab.qualifications || "Qualifications";
-    if (b) b.textContent = lab.affiliations || "Affiliations";
-  }
-
   /* ------------------------------------------------------------------ RUN */
   function boot() {
     if (typeof SITE === "undefined") { console.error("data.js failed to load"); return; }
     renderHero(); renderSciComm(); renderAbout(); renderResearch();
     renderPubs(); renderHonors(); renderTourList(); renderContact();
-    initNav(); initMapKey(); initReveal();
+    initNav(); initReveal();
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();
 
-  window.addEventListener("load", function () { initMap(); initTourMap(); });
+  window.addEventListener("load", initTourMap);
 })();
