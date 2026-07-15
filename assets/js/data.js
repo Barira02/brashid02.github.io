@@ -38,9 +38,9 @@ const SITE = {
     // EDIT: swap the search-page links below for your real profile URLs
     links: {
       linkedin:     "https://www.linkedin.com/in/brashid02/",
-      scholar:      "https://scholar.google.com/scholar?q=%22Barira+Rashid%22",
+      scholar:      "https://scholar.google.com/citations?user=Sm7FDpQAAAAJ&hl=en&oi=ao",
       researchgate: "https://www.researchgate.net/profile/Barira-Rashid",
-      orcid:        "https://orcid.org/orcid-search/search?searchQuery=Barira%20Rashid"
+      orcid:        "https://orcid.org/0000-0002-4601-1675"
     },
 
     // optional: put a PDF at assets/cv.pdf and set this to "assets/cv.pdf"
@@ -143,7 +143,7 @@ const SITE = {
       type:   "Essay",
       kicker: "Lithosphere · GeoScienceWorld",
       title:  "Navigating Earth Sciences: Addressing Equity and Sustainability Through Interdisciplinary Endeavors",
-      blurb:  "The essay that won the inaugural GeoScienceWorld Diversity & Representation Award — on who gets to do Earth science, and what the field loses when the answer stays narrow.",
+      blurb:  "The essay that won the inaugural GeoScienceWorld Grad Scholar Award — on who gets to do Earth science, and what the field loses when the answer stays narrow.",
       meta:   ["2024", "Award essay"],
       links:  [{ label: "Read the essay ↗", url: "https://doi.org/10.2113/2024/lithosphere_2024_198" }],
       citation: "Rashid, B. 2024. Navigating Earth Sciences: Addressing Equity and Sustainability Through Interdisciplinary Endeavors. Lithosphere, 2024(3). https://doi.org/10.2113/2024/lithosphere_2024_198",
