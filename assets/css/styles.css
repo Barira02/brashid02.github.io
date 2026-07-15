@@ -67,13 +67,13 @@ nav.scrolled .nav-links a:hover{color:var(--rose-ink);}
 .hero::before{content:"";position:absolute;inset:0;opacity:.5;pointer-events:none;
   background:repeating-linear-gradient(0deg,transparent 0 47px,rgba(255,255,255,.035) 47px 48px),
              repeating-linear-gradient(90deg,transparent 0 47px,rgba(255,255,255,.035) 47px 48px);}
-.hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.02fr .98fr;gap:56px;align-items:center;}
+.hero-single{position:relative;z-index:2;}
 .hero-eyebrow{font-family:var(--mono);font-size:.73rem;letter-spacing:.24em;text-transform:uppercase;color:var(--teal);margin-bottom:1.5rem;}
-.hero h1{font-size:clamp(3.1rem,8vw,6rem);font-weight:600;letter-spacing:-.025em;margin:0 0 .28em;color:#fff;}
+.hero h1{font-size:clamp(3.2rem,9vw,6.6rem);font-weight:600;letter-spacing:-.025em;margin:0 0 .28em;color:#fff;}
 .hero h1 em{font-style:italic;font-weight:400;color:var(--rose);}
-.hero .role{font-weight:500;font-size:clamp(1.02rem,1.7vw,1.3rem);color:#E4E0FA;max-width:28ch;line-height:1.3;margin-bottom:1.2rem;}
-.hero .thesis{font-family:var(--display);font-style:italic;font-weight:400;font-size:clamp(1.2rem,2vw,1.55rem);
-  color:#C7C1E8;max-width:30ch;margin-bottom:1.5rem;line-height:1.35;}
+.hero .role{font-weight:500;font-size:clamp(1.05rem,1.8vw,1.35rem);color:#E4E0FA;max-width:34ch;line-height:1.3;margin-bottom:1.3rem;}
+.hero .thesis{font-family:var(--display);font-style:italic;font-weight:400;font-size:clamp(1.5rem,3.4vw,2.4rem);
+  color:#C7C1E8;max-width:20ch;margin-bottom:1.6rem;line-height:1.25;}
 .quip{display:inline-block;font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;color:#9C95CC;
   border-left:2px solid var(--gold);padding-left:.7em;margin-bottom:2rem;}
 .coords{font-family:var(--mono);font-size:.76rem;letter-spacing:.05em;color:#A8A1D6;margin-bottom:2rem;
@@ -87,20 +87,6 @@ nav.scrolled .nav-links a:hover{color:var(--rose-ink);}
 .btn.solid{background:var(--rose);border-color:var(--rose);color:#2A0A16;font-weight:600;}
 .btn.solid:hover{background:var(--gold);border-color:var(--gold);color:#3A2600;}
 
-/* ---- journey map ---- */
-.jmap-frame{border:1px solid rgba(255,255,255,.18);background:#0C0A24;position:relative;
-  box-shadow:0 30px 60px -30px rgba(0,0,0,.7);}
-.jmap-cap{display:flex;justify-content:space-between;align-items:center;padding:9px 13px;
-  border-bottom:1px solid rgba(255,255,255,.12);font-family:var(--mono);font-size:.66rem;
-  letter-spacing:.12em;text-transform:uppercase;color:#9C95CC;}
-.jmap-cap b{color:var(--rose);}
-#journey{height:400px;width:100%;background:#0C0A24;z-index:1;}
-.jkey{display:flex;flex-wrap:wrap;gap:.4rem 1rem;margin-top:12px;font-family:var(--mono);font-size:.67rem;color:#B4AED9;}
-.jkey span{display:inline-flex;align-items:center;gap:.45em;}
-.jkey i{width:10px;height:10px;border-radius:50%;display:inline-block;}
-.jkey-hint{color:#7B74AE;}
-.jmap-foot{margin-top:8px;font-family:var(--mono);font-size:.64rem;letter-spacing:.04em;color:#7B74AE;
-  display:flex;justify-content:space-between;gap:1rem;}
 .pin{background:var(--rose);color:#2A0A16;font-family:var(--mono);font-weight:600;font-size:11px;
   width:22px;height:22px;border-radius:50%;display:grid;place-items:center;border:2px solid #fff;
   box-shadow:0 0 0 3px rgba(255,92,138,.35);}
@@ -111,11 +97,10 @@ nav.scrolled .nav-links a:hover{color:var(--rose-ink);}
 .leaflet-popup-content-wrapper{border-radius:0;border:1px solid var(--ink);box-shadow:none;}
 .leaflet-popup-content{margin:10px 12px;font-family:var(--body);font-size:.88rem;line-height:1.45;}
 .leaflet-popup-content strong{font-family:var(--display);}
-.leaflet-control-scale-line{border-radius:0;border-color:#fff;color:#fff;font-family:var(--mono);background:rgba(20,17,56,.6);}
+.leaflet-control-scale-line{border-radius:0;border-color:var(--ink);color:var(--ink);font-family:var(--mono);background:rgba(255,255,255,.85);}
 .leaflet-bar a{border-radius:0 !important;}
-.leaflet-control-layers{border-radius:0;border:1px solid rgba(255,255,255,.25);background:rgba(20,17,56,.92);
-  color:#D9D4F2;font-family:var(--mono);font-size:.7rem;}
-.leaflet-control-layers-toggle{background-color:rgba(20,17,56,.92);}
+.leaflet-control-layers{border-radius:0;border:1px solid var(--line);background:rgba(255,255,255,.94);
+  color:var(--ink-soft);font-family:var(--mono);font-size:.7rem;}
 .leaflet-control-layers label{margin:2px 0;}
 
 /* ==================== SCIENCE COMMUNICATION / OPEN DATA ================== */
@@ -268,9 +253,8 @@ a.todo:hover{border-bottom:1px solid var(--gold-ink);}
   body{font-size:17px;}
   section{padding:74px 0;}
   .hero{padding:120px 0 56px;}
-  .hero-grid,.about-grid{grid-template-columns:1fr;gap:38px;}
+  .about-grid{grid-template-columns:1fr;gap:38px;}
   .cards,.honors,.od-grid,.out-list{grid-template-columns:1fr;}
-  #journey{height:340px;}
   .tour{grid-template-columns:1fr;gap:20px;}
   .tour-map-col{position:static;}
   #tour-map{height:320px;}
